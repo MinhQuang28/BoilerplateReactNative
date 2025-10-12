@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { RefreshControl } from 'react-native';
 
 import { FlashList } from '@shopify/flash-list';
 
@@ -8,12 +8,14 @@ import { ListViewProps } from './type';
 export const ListView = (props: ListViewProps) => {
   // state
   const {
-    type = 'flashlist',
+    data,
+    reverted = false,
     onRefresh,
     onLoadMore,
     canRefresh = false,
     canLoadMore = false,
     refreshing = false,
+    ...rest
   } = props;
 
   // function
@@ -23,21 +25,28 @@ export const ListView = (props: ListViewProps) => {
     }
   };
 
-  const ListComponent = type === 'flashlist' ? FlashList : FlatList;
-
   // render
   return (
-    <ListComponent
+    <FlashList
       refreshControl={
         canRefresh ? (
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         ) : undefined
       }
-      onEndReached={loadMore}
-      onEndReachedThreshold={0.001}
+      onEndReached={reverted ? undefined : loadMore}
+      onStartReached={reverted ? loadMore : undefined}
+      data={reverted && data ? [...data].reverse() : data}
+      keyExtractor={(_, index) => `list-view-${index}`}
+      maintainVisibleContentPosition={{
+        autoscrollToBottomThreshold: 0.2,
+        disabled: !reverted,
+        startRenderingFromBottom: reverted,
+      }}
+      onEndReachedThreshold={0.5}
+      onStartReachedThreshold={0.5}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-      {...props}
+      {...rest}
       onRefresh={undefined}
       refreshing={undefined}
     />

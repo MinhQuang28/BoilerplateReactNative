@@ -38,11 +38,11 @@ const KeyboardProvider = ({ children }: { children?: ReactNode }) => {
   );
 };
 
-export const MyApp = () => {
+export const MyApp = ({ isHeadless }: { isHeadless: boolean }) => {
   // state
   const isLoaded = useLoadFont();
 
-  if (!isLoaded) {
+  if (!isLoaded || isHeadless) {
     return null;
   }
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { memo, useEffect, useMemo, useState } from 'react';
-import { ViewStyle } from 'react-native';
+import { Text, ViewStyle } from 'react-native';
 
 import {
   Directions,
@@ -10,15 +10,15 @@ import {
 import {
   AnimatableValue,
   Easing,
-  runOnJS,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
-import { sharedTiming, sharePause } from '@animated';
+import { sharePause } from '@animated';
 import { useErrorMessageTranslation } from '@hooks';
-import { AnimatedView, Text } from '@rn-core';
+import { AnimatedView } from '@rn-core';
 
 import {
   BG_ERROR,
@@ -78,7 +78,7 @@ export const SnackItem = memo(
       const animations = {
         // your animations
         transform: [
-          { translateY: sharedTiming(0, { duration: DURATION_ANIMATED }) },
+          { translateY: withTiming(0, { duration: DURATION_ANIMATED }) },
         ],
       };
 
@@ -103,7 +103,7 @@ export const SnackItem = memo(
       const animations = {
         transform: [
           {
-            translateY: sharedTiming(-(values.currentHeight + insets.top), {
+            translateY: withTiming(-(values.currentHeight + insets.top), {
               duration: DURATION_ANIMATED,
             }),
           },
@@ -119,7 +119,7 @@ export const SnackItem = memo(
       };
 
       const callback = (_: boolean) => {
-        runOnJS(onPop)(item);
+        scheduleOnRN(onPop, item);
         // optional callback that will fire when layout animation ends
       };
 
@@ -134,7 +134,7 @@ export const SnackItem = memo(
       .onStart(() => {
         shouldContinue.value = false;
 
-        runOnJS(setIsShow)(false);
+        scheduleOnRN(setIsShow, false);
       })
       .onFinalize(() => {
         if (shouldContinue.value) {
@@ -157,7 +157,7 @@ export const SnackItem = memo(
           },
           (finished?: boolean, _current?: AnimatableValue) => {
             if (finished) {
-              runOnJS(setIsShow)(false);
+              scheduleOnRN(setIsShow, false);
             }
           },
         ),

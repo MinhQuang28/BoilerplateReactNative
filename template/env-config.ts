@@ -4,7 +4,7 @@
 
 import Keys from 'react-native-keys';
 
-export const APP_BUILD_VERSION = '1.0.0.2025.06.07.13.31';
+export const APP_BUILD_VERSION = '1.0.0.2025.10.12.21.40';
 
 export const { BUNDLE_IDENTIFIER } = Keys;
 

@@ -1,9 +1,8 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import { useSharedValue } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
-
-import { View } from '@rn-core';
 
 import { TabItem } from './tab-item';
 import { Tab, TabsProps } from './type';

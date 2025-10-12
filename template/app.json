@@ -6,7 +6,10 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "scheme": "HelloWorld",
     "ios": {
       "supportsTablet": false,
@@ -17,14 +20,9 @@
       "edgeToEdgeEnabled": true
     },
     "plugins": [
-      [
-        "expo-dev-client",
-        {
-          "launchMode": "most-recent"
-        }
-      ],
-      "react-native-keys",
-      "expo-font"
+      "expo-font",
+      "react-native-bootsplash",
+      "react-native-keys"
     ]
   }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Image, ImageStyle, StyleSheet } from 'react-native';
+import { Image, ImageStyle, StyleSheet, View } from 'react-native';
 
 import { images } from '@assets/image';
-import { View } from '@rn-core';
 
 import { LocalImageProps } from './type';
 

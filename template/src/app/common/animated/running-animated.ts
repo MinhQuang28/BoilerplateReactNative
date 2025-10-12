@@ -2,53 +2,13 @@
 import {
   AnimatableValue,
   Animation,
-  AnimationCallback,
   AnimationObject,
   defineAnimation,
-  Easing,
   SharedValue,
-  withSpring,
-  WithSpringConfig,
-  withTiming,
-  WithTimingConfig,
 } from 'react-native-reanimated';
 
-import { HigherOrderAnimation } from 'react-native-reanimated/lib/typescript/animation';
+import { HigherOrderAnimation } from 'react-native-reanimated/lib/typescript/animation/commonTypes';
 import { Timestamp } from 'react-native-reanimated/lib/typescript/commonTypes';
-
-/**
- * Updates position by running timing based animation from a given position to a destination determined by toValue.
- */
-export const sharedTiming = (
-  toValue: number,
-  config?: WithTimingConfig,
-  callBack?: AnimationCallback,
-) => {
-  'worklet';
-
-  return withTiming(
-    toValue,
-    {
-      duration: 500,
-      easing: Easing.bezier(0.33, 0.01, 0, 1),
-      ...(config ?? {}),
-    },
-    callBack,
-  );
-};
-
-/**
- * Updates position and velocity by running a single step of spring based animation
- */
-export const sharedSpring = (
-  toValue: number,
-  config?: WithSpringConfig,
-  callBack?: AnimationCallback,
-) => {
-  'worklet';
-
-  return withSpring(toValue, config, callBack);
-};
 
 type SharePauseType = <T extends AnimatableValue>(
   nextAnimation: T,

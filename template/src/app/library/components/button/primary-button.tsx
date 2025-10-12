@@ -1,12 +1,12 @@
 import React from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableWithoutFeedback } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import { useAnimatedStyle } from 'react-native-reanimated';
 import { useStyles } from 'react-native-unistyles';
 
 import { Icon } from '@components/icon';
-import { AnimatedView, Text } from '@rn-core';
+import { AnimatedView } from '@rn-core';
 import { Colors } from '@theme/index';
 
 import { useThrottle } from './hook';

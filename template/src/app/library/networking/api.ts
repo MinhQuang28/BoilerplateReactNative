@@ -17,8 +17,6 @@ const configApi = () => {
   return apiOb;
 };
 
-type ApiConstantsType<T> = {
-  [a in keyof T]: string;
-};
+type ApiConstantsType<T> = Record<keyof T, string>;
 
 export const ApiConstants = configApi() as ApiConstantsType<typeof ApiEndPoint>;

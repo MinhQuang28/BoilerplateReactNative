@@ -6,7 +6,7 @@ import {
   useDerivedValue,
 } from 'react-native-reanimated';
 
-import { sharedClamp, sharedMax, sharedMin } from './math';
+import { sharedClamp } from './math';
 
 /**
  * Interpolate number
@@ -37,15 +37,6 @@ export const useInterpolateColor = (
 };
 
 /**
- * Linear interpolation between x and y using a to weight between them
- */
-export const useMix = (progress: SharedValue<number>, x: number, y: number) => {
-  'worklet';
-
-  return useDerivedValue(() => x + progress.value * (y - x));
-};
-
-/**
  * Convert number to radian
  */
 export const useRadian = (value: SharedValue<number>) =>
@@ -68,22 +59,4 @@ export const useShareClamp = (
   return useDerivedValue(() =>
     sharedClamp(value.value, lowerValue, upperValue),
   );
-};
-
-/**
- * Return min number of args
- */
-export const useMin = (...args: SharedValue<number>[]) => {
-  'worklet';
-
-  return useDerivedValue(() => sharedMin(...args.map(x => x.value)));
-};
-
-/**
- * Return max number of args
- */
-export const useMax = (...args: SharedValue<number>[]) => {
-  'worklet';
-
-  return useDerivedValue(() => sharedMax(...args.map(x => x.value)));
 };

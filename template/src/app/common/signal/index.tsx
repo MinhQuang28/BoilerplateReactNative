@@ -20,9 +20,10 @@ class Signal {
   };
 }
 
-type ObjectFromList<T extends ReadonlyArray<string>, V = string> = {
-  [K in T extends ReadonlyArray<infer U> ? U : never]: V;
-};
+type ObjectFromList<T extends readonly string[], V = string> = Record<
+  T[number],
+  V
+>;
 
 export function createSignal<T extends ReadonlyArray<string>>(
   list: T,

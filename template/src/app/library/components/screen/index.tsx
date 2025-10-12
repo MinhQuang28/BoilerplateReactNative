@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import {
   StyleSheet,
   useWindowDimensions,
+  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -14,8 +15,6 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
-
-import { View } from '@rn-core';
 
 import {
   InsetComponentProps,

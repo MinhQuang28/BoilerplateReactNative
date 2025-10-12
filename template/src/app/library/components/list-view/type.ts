@@ -1,20 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FlatListProps } from 'react-native';
-
 import { FlashListProps } from '@shopify/flash-list';
 
-export type ListViewProps = (
-  | ({
-      type: 'flatlist';
-    } & ReOmit<
-      FlatListProps<any>,
-      'onRefresh' | 'refreshControl' | 'refreshing'
-    >)
-  | ({ type?: 'flashlist' } & ReOmit<
-      FlashListProps<any>,
-      'onRefresh' | 'refreshControl' | 'refreshing'
-    >)
-) & {
+export type ListViewProps<T = any> = FlashListProps<T> & {
   /**
    * Function when refreshing
    * @default undefined
@@ -44,4 +31,9 @@ export type ListViewProps = (
    * @default true
    */
   canRefresh?: boolean;
+
+  /**
+   * Enable revert data
+   */
+  reverted?: boolean;
 };

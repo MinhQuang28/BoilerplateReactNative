@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageProps, TouchableWithoutFeedback } from 'react-native';
+import { ImageProps, TouchableWithoutFeedback, View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,7 +10,7 @@ import {
 import { useStyles } from 'react-native-unistyles';
 
 import { AnimatedIcon } from '@components/icon';
-import { AnimatedText, View } from '@rn-core';
+import { AnimatedText } from '@rn-core';
 
 import { useThrottle } from './hook';
 import { buttonStyleSheet } from './styles';

@@ -14,13 +14,13 @@ import {
 } from 'react-native';
 
 import {
-  runOnJS,
   useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
-import { sharedTiming } from '@animated';
 import { useDisableBackHandler } from '@hooks';
 import { AnimatedView } from '@rn-core';
 
@@ -84,7 +84,7 @@ export const ModalContent = forwardRef(
     const onEndAnimatedClose = (isFinished?: boolean) => {
       'worklet';
       if (isFinished) {
-        runOnJS(closeEnd)();
+        scheduleOnRN(closeEnd);
       }
     };
 
@@ -92,14 +92,14 @@ export const ModalContent = forwardRef(
       'worklet';
 
       if (isFinished) {
-        runOnJS(openEnd)();
+        scheduleOnRN(openEnd);
       }
     };
 
     const openModal = () => {
       execFunc(onModalWillShow);
 
-      reBackdropOpacity.value = sharedTiming(
+      reBackdropOpacity.value = withTiming(
         backdropOpacity,
         undefined,
         isFinished => {
@@ -121,7 +121,7 @@ export const ModalContent = forwardRef(
         execFunc(onSetClose);
       }
 
-      reBackdropOpacity.value = sharedTiming(
+      reBackdropOpacity.value = withTiming(
         0,
         { duration: exiting ? 300 : 0 },
         isFinished => {

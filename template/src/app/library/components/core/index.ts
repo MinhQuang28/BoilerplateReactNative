@@ -1,7 +1,6 @@
-import Animated from 'react-native-reanimated';
+import { Text, View } from 'react-native';
 
-import { Text } from './Text';
-import { View } from './View';
+import Animated from 'react-native-reanimated';
 
 export const AnimatedText = Animated.createAnimatedComponent(Text);
 

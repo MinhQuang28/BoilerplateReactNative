@@ -5,7 +5,7 @@ module.exports = {
     },
   },
   plugins: [
-    'react-native-reanimated/plugin',
+    'react-native-worklets/plugin',
     [
       'module-resolver',
       {

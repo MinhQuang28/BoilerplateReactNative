@@ -1,8 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, useWindowDimensions, ViewProps } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+  ViewProps,
+} from 'react-native';
 
 import {
-  runOnJS,
   useAnimatedProps,
   useAnimatedStyle,
   useDerivedValue,
@@ -14,6 +19,7 @@ import {
   UnistylesRuntime,
   useStyles,
 } from 'react-native-unistyles';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { OutlineButton } from '@components/button/outline-button';
 import { PrimaryButton } from '@components/button/primary-button';
@@ -22,7 +28,7 @@ import { Divider } from '@components/divider';
 import { RadioButton } from '@components/radio-button';
 import { Screen } from '@components/screen';
 import { Tabs } from '@components/tabs';
-import { AnimatedView, Text, View } from '@rn-core';
+import { AnimatedView } from '@rn-core';
 import {
   Canvas,
   Circle,
@@ -54,7 +60,7 @@ export const Login = () => {
 
   const image2 = useSharedValue<SkImage | null>(null);
 
-  const rootRef = useRef<any>(null);
+  const rootRef = useRef<View>(null);
 
   const { styles, theme } = useStyles(styleSheet);
 
@@ -66,6 +72,8 @@ export const Login = () => {
   };
 
   const handleChangeTheme = async () => {
+    await wait(300);
+
     opacity.value = 1;
 
     const overlay1 = await makeImageFromView(rootRef);
@@ -86,7 +94,7 @@ export const Login = () => {
 
     r.value = withTiming(height * 1.5, { duration: 1000 }, f => {
       if (f) {
-        runOnJS(updateStatusBar)(theme.type);
+        scheduleOnRN(updateStatusBar, theme.type);
 
         opacity.value = 0;
 
@@ -125,7 +133,6 @@ export const Login = () => {
       <View collapsable={false} ref={rootRef} style={styles.root}>
         <Screen
           scroll
-          excludeEdges={['bottom', 'top']}
           statusBarStyle={barStyle}
           style={{ paddingHorizontal: 10, paddingVertical: 0 }}
           backgroundColor={'transparent'}>

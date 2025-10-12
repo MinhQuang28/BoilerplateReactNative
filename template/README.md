@@ -3,7 +3,7 @@
 # Setup
 
 - Setup development environment [React Native CLI](https://reactnative.dev/docs/environment-setup)
-- Node version >= 20 (recommended use [fnm](https://github.com/Schniz/fnm))
+- Node version >= 21 (recommended use [fnm](https://github.com/Schniz/fnm))
 - We recommended to use [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) or [bun](https://bun.sh/)
 - Ruby version: 3.2.2 (recommended use [rbenv](https://github.com/rbenv/rbenv))
 
@@ -60,13 +60,11 @@ Example `.bash_profile`:
 Ex: New Environment named: Demo
 
 - ## Setup env
-
   - Create new env file in env folder (.demo)
   - Copy all value from `dev.json` to new env file
   - Update value in new env file
 
 - ## Setup fastlane
-
   - Create new env file with name syntax: .env.<env_name> (.env.demo)
   - Copy app value from `.envdev.json` to new env file
   - Update value in new env file
@@ -82,7 +80,6 @@ Ex: New Environment named: Demo
 - ## Setup splash, app icon, script build
 
 - ### Splash
-
   - This project use [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash) to create splash file. Read the docs before continue
   - Get splash file then copy to `splash` folder named: `splash-<environment_name>.png`. ex: `splash-demo.png`
   - Create new script in `package.json` file. ex:
@@ -94,7 +91,6 @@ Ex: New Environment named: Demo
       - Open `HelloWorld.xcworkspace` via xcode then add `BootSplashDemo.storyboad` file to xcode.
 
 - ### App icon
-
   - This project use [rn-ml](https://github.com/ngocle2497/cli-tools) to gen app icon automatically
     - App icon saved in `appicon` folder
     - Get new `png` file with dimension 1024x1024. <b>The file must not include transparent pixel.</b>
@@ -109,14 +105,12 @@ Ex: New Environment named: Demo
 > ## This project use [react-native-keys](https://github.com/numandev1/react-native-keys) to switch env
 
 - ### Android
-
   - Add new flavor `productFlavors` section in `android/app/build.gradle`
   - Add env path to `project.ext.keyFiles` section in `android/app/build.gradle`.
   - Gen new `google-services.json` from Firebase then copy to `android/app/src/<flavor_name>`. ex: `android/app/src/demo/google-services.json`.
   - If `android/app/src/<flavor_name>` not exits, create new folder for it
 
 - ### IOS
-
   - Gen new `GoogleService-Info.plist` from Firebase
   - Create new folder with name like `SCHEME_SUFFIX` section in env file to `ios/GoogleService/<SCHEME_SUFFIX>`. Then copy file `GoogleService-Info.plist` to this. More info, u can read `Setup Firebase Environment GoogleService-Info.plist` section in `Build Phase` in workspace file
   - Open Open `HelloWorld.xcworkspace` via xcode

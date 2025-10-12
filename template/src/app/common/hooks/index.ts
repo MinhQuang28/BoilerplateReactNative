@@ -57,7 +57,7 @@ function useInterval(callback: Function, delay: number) {
 }
 
 function usePrevious<T = any>(value: T): T | undefined {
-  const ref = useRef<T>();
+  const ref = useRef<T>(value);
 
   useEffect(() => {
     ref.current = value;
@@ -234,7 +234,8 @@ function useErrorMessageTranslation(msg?: string) {
 const useEventCallback = <Fn extends (...args: any[]) => ReturnType<Fn>>(
   func: Fn,
 ) => {
-  const callbackRef = useRef<(...args: Parameters<Fn>) => ReturnType<Fn>>();
+  const callbackRef =
+    useRef<(...args: Parameters<Fn>) => ReturnType<Fn>>(undefined);
 
   const callbackMemoized = useCallback((...args: Parameters<Fn>) => {
     return callbackRef.current?.(...args);

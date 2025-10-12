@@ -5,9 +5,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { StyleSheet } from 'react-native';
-
-import { View } from '@rn-core';
+import { StyleSheet, View } from 'react-native';
 
 import { DURATION_HIDE } from './constants';
 import { SnackItem } from './snack-bar-item';

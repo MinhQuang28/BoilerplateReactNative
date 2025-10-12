@@ -5,8 +5,6 @@ import {
   SharedValue,
   useDerivedValue,
   useSharedValue,
-  withSpring,
-  WithSpringConfig,
   withTiming,
   WithTimingConfig,
 } from 'react-native-reanimated';
@@ -34,21 +32,4 @@ export const useSharedTransition = (
       ...(config ?? {}),
     }),
   );
-};
-
-/**
- * Return value runs from 0 to 1 when state change using withSpring
- */
-export const useSharedSpringTransition = (
-  state: boolean,
-  config?: WithSpringConfig,
-  initialValue?: number,
-): SharedValue<number> => {
-  const value = useSharedValue(initialValue ?? 0);
-
-  useEffect(() => {
-    value.value = typeof state === 'boolean' ? sharedBin(state) : state;
-  }, [state, value]);
-
-  return useDerivedValue(() => withSpring(value.value, config));
 };

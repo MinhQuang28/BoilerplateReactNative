@@ -63,10 +63,10 @@ index 90c07e8..8c3ef1e 100644
      if (!props.isSimulator) {
          if (props.device.osType === 'macOS') {
 diff --git a/node_modules/@expo/cli/build/src/run/ios/runIosAsync.js b/node_modules/@expo/cli/build/src/run/ios/runIosAsync.js
-index 2cf0cad..7e4536d 100644
+index 808a473..b49fd64 100644
 --- a/node_modules/@expo/cli/build/src/run/ios/runIosAsync.js
 +++ b/node_modules/@expo/cli/build/src/run/ios/runIosAsync.js
-@@ -225,13 +225,15 @@ async function runIosAsync(projectRoot, options) {
+@@ -230,13 +230,15 @@ async function runIosAsync(projectRoot, options) {
          port: props.port,
          headless: !props.shouldStartBundler,
          // If a scheme is specified then use that instead of the package name.
@@ -271,12 +271,12 @@ index c0ebf7e..f4b8c80 100644
          return this.platformManagers[platform];
      }
 diff --git a/node_modules/@expo/cli/build/src/start/startAsync.js b/node_modules/@expo/cli/build/src/start/startAsync.js
-index cc9e651..70ea8fb 100644
+index 43c705e..c7a4186 100644
 --- a/node_modules/@expo/cli/build/src/start/startAsync.js
 +++ b/node_modules/@expo/cli/build/src/start/startAsync.js
-@@ -158,6 +158,7 @@ async function startAsync(projectRoot, options, settings) {
-     // Present the Terminal UI.
+@@ -160,6 +160,7 @@ async function startAsync(projectRoot, options, settings) {
      if ((0, _interactive.isInteractive)()) {
+         const mcpServer = await (0, _profile.profile)(_MCP.maybeCreateMCPServerAsync)(projectRoot);
          await (0, _profile.profile)(_startInterface.startInterfaceAsync)(devServerManager, {
 +            appId: options?.appId,
              platforms: exp.platforms ?? [
